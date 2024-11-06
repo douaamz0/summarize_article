@@ -66,55 +66,59 @@ class _SummaryAppState extends State<SummaryApp> {
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            SizedBox(height: 24), // Espace entre l'AppBar et le champ de texte
-            TextField(
-              controller: urlController,
-              decoration: InputDecoration(
-                labelText: "Entrez l'URL de l'article",
-                border: OutlineInputBorder(),
+        child: SingleChildScrollView(
+          // Ajouter ici pour le défilement
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              SizedBox(
+                  height: 24), // Espace entre l'AppBar et le champ de texte
+              TextField(
+                controller: urlController,
+                decoration: InputDecoration(
+                  labelText: "Entrez l'URL de l'article",
+                  border: OutlineInputBorder(),
+                ),
               ),
-            ),
-            SizedBox(height: 24), // Espace entre le champ et le bouton
-            ElevatedButton(
-              onPressed: isLoading ? null : getSummary,
-              child: Text("Obtenir le résumé"),
-            ),
-            SizedBox(height: 24), // Espace entre le bouton et le contenu
-            if (isLoading) Center(child: CircularProgressIndicator()),
-            if (errorMessage.isNotEmpty)
-              Text(
-                errorMessage,
-                style: TextStyle(color: Colors.red),
+              SizedBox(height: 24), // Espace entre le champ et le bouton
+              ElevatedButton(
+                onPressed: isLoading ? null : getSummary,
+                child: Text("Obtenir le résumé"),
               ),
-            if (title != null)
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    "Titre : $title",
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize:
-                          18, // Augmentation de la taille de la police du titre
+              SizedBox(height: 24), // Espace entre le bouton et le contenu
+              if (isLoading) Center(child: CircularProgressIndicator()),
+              if (errorMessage.isNotEmpty)
+                Text(
+                  errorMessage,
+                  style: TextStyle(color: Colors.red),
+                ),
+              if (title != null)
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      "Titre : $title",
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize:
+                            18, // Augmentation de la taille de la police du titre
+                      ),
                     ),
-                  ),
-                  SizedBox(height: 8),
-                  Text("Auteur(s) : $author"),
-                  SizedBox(height: 8),
-                  Text("Date de publication : $publicationDate"),
-                  SizedBox(height: 16),
-                  Text(
-                    "Résumé : ",
-                    style: TextStyle(fontWeight: FontWeight.bold),
-                  ),
-                  SizedBox(height: 8),
-                  Text(summary!, style: TextStyle(fontSize: 16)),
-                ],
-              ),
-          ],
+                    SizedBox(height: 8),
+                    Text("Auteur(s) : $author"),
+                    SizedBox(height: 8),
+                    Text("Date de publication : $publicationDate"),
+                    SizedBox(height: 16),
+                    Text(
+                      "Résumé : ",
+                      style: TextStyle(fontWeight: FontWeight.bold),
+                    ),
+                    SizedBox(height: 8),
+                    Text(summary!, style: TextStyle(fontSize: 16)),
+                  ],
+                ),
+            ],
+          ),
         ),
       ),
     );

@@ -3,7 +3,8 @@ from newspaper import Article
 from flask_cors import CORS
 import os
 import nltk
-nltk.download('punkt', download_dir='/opt/render/project/src/.venv/nltk_data')
+
+nltk.download('punkt_tab')
 
 
 

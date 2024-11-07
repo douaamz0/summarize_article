@@ -6,13 +6,9 @@ import nltk
 
 nltk.download('punkt_tab')
 
-
-
-
 app = Flask(__name__)
 
-# CORS - Autoriser toutes les origines pendant le développement, ou préciser les origines pour la prod
-CORS(app, resources={r"/resumer": {"origins": "https://summarize-article-64a2e.web.app"}})  # Pour le développement, "*" autorise toutes les origines.
+CORS(app, resources={r"/resumer": {"origins": "https://summarize-article-64a2e.web.app"}})
 
 @app.route('/resumer', methods=['POST'])
 def resumer():
@@ -37,5 +33,6 @@ def resumer():
 if __name__ == '__main__':
     # Utilisation du port dynamique de Render
     port = int(os.environ.get('PORT', 5000))  # Si la variable d'environnement PORT n'est pas définie, utilise 5000
+    #rendre accessible via ip
     app.run(host='0.0.0.0', port=port, debug=True)
 
